@@ -1,0 +1,22 @@
+<div class="logintop">
+	<span>Amazon后台管理界面平台</span>
+
+	<ul>
+		<% if(isLogin){%>
+		<li>
+			<a href="#">欢迎回来，<b style='font-weight:700'><%= username%></b></a>
+		</li>
+		<li>
+			<a href="/logout">注销登录</a>
+		</li>
+		<% }else if(goLogin){%>
+		<li>
+			<a href="#">请先登录个人账号</a>
+		</li>
+		<% }else if(goRegister){%>
+		<li>
+			<a href="#">请填写信息并注册</a>
+		</li>
+		<% }%>
+	</ul>
+</div>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Amazon后台管理系统</title>
+		<link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+		<link rel='stylesheet' href='/bootstrap/css/bootstrap.css' />
+		<script type="text/javascript" src="/bootstrap/js/jquery.js"></script>
+		<script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+	</head>
+
+	<body style="background-color:#1c77ac; background-image:url(images/light.png); background-repeat:no-repeat; background-position:center top; overflow:hidden;">
+
+		<div id="mainBody">
+			<div id="cloud1" class="cloud"></div>
+			<div id="cloud2" class="cloud"></div>
+		</div>
+		<%- include('./header.ejs',{isLogin:isLogin,username:username,goLogin:false,goRegister:false})%>
+		<div class="rightinfo">
+			<% if(isEmpty){%>
+			<div class="container" style="padding-top: 50px;">
+				<div class="jumbotron">
+					<h1 style="font-size: 40px;padding-bottom: 30px;">对不起，您尚未发布商品，快去发布新品吧！</h1>
+					<p>
+						<a class="btn btn-primary btn-lg" style="line-height: 15px;" href="/addGood" role="button">发布新品</a>
+					</p>
+				</div>
+			</div>
+			<% }else{%>
+			<div class="tools">
+				<ul class="toolbar">
+					<li class="click addGood"><span><img src="images/t01.png"></span>发布新品</li>
+					<li class="detail"><span><img src="images/t04.png" /></span>商品详情</li>
+					<li class="click redo"><span><img src="images/t02.png"></span>修改信息</li>
+					<li class="del"><span><img src="images/t03.png"></span>下架商品</li>
+				</ul>
+			</div>
+
+			<table class="tablelist">
+				<thead>
+					<tr>
+						<th></th>
+						<th>编号<i class="sort"><img src="images/px.gif"></i></th>
+						<th>商品名称</th>
+						<th>类别</th>
+						<th>价格</th>
+						<th>商家</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% for(var i=0;i<list.length;i++){%>
+					<tr>
+						<td><input sid="<%= list[i]._id%>" type="checkbox" value=""></td>
+						<td class="nums">
+							<%= i+1+skip%>
+						</td>
+						<td>
+							<%= list[i].goodname%>
+						</td>
+						<td>
+							<%= list[i].keyword%>
+						</td>
+						<td>
+							<%= list[i].price%>
+						</td>
+						<td>
+							<%= list[i].saler%>
+						</td>
+					</tr>
+					<%}%>
+				</tbody>
+			</table>
+			<% if(count>5){%>
+			<nav aria-label="Page navigation" style="text-align: center;margin-top: 80px;">
+				<ul class="pagination">
+					<% for(var i=0;i<Math.ceil(count/5);i++){%>
+					<li>
+						<a style="cursor: pointer;">
+							<%= i+1%>
+						</a>
+					</li>
+					<% }%>
+				</ul>
+			</nav>
+			<% }%>
+			<% }%>
+
+		</div>
+
+		<div class="loginbm">版权所有 © 1996-2017，亚马逊公司或其关联公司</div>
+		<script src="/javascripts/require.js" data-main="/javascripts/main_index.js" type="text/javascript" defer async="true charset=" utf-8 "></script>
+	</body>
+
+</html>
